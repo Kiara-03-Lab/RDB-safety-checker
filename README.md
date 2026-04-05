@@ -1,22 +1,55 @@
-# rdb-safe CLI
+# rdb-safety-checker
 
-Terminal checker for database deployment safety. Blocks deploys automatically if your schema is unsafe.
+**Avoid database crashes when launching your app on Vercel or Railway.**
 
-## Install
+![flowchart](flowchart2003.svg)
+
+Paste your database code into Claude — or run it from your terminal — and get a plain-English report on what will break before you go live.
+
+## Two real scenarios
+
+**Scenario 1 — The silent crash**
+
+Hana launches her booking app on Vercel. Everything works fine in testing. On launch day, 60 people visit at the same time and the app goes down. The error log says "too many connections." She had 20 database connections available but needed 60. rdb-safe would have caught this in 30 seconds and told her to add a connection pooler before launch.
+
+**Scenario 2 — The failed deploy**
+
+Kenji pushes his e-commerce app to Railway. The deploy starts, runs for 70 seconds, then fails with a timeout error. His database setup was too complex to finish within Railway's limit. He has no idea why. rdb-safe would have flagged his large product table and told him to split the setup into two steps.
+
+---
+
+## Option A — Use with Claude.ai (no code needed)
+
+1. Open [claude.ai](https://claude.ai)
+2. Copy the prompt file for your platform
+3. Paste it into Claude
+4. Replace `[PASTE YOUR SQL HERE]` at the bottom with your database code
+5. Send — Claude explains what's safe and what to fix
+
+| I am deploying on... | Use this file |
+|----------------------|---------------|
+| Vercel | `prompt-vercel.md` |
+| Railway | `prompt-railway.md` |
+
+---
+
+## Option B — Use as a CLI (for developers)
+
+### Install
 
 ```bash
 npm install -g rdb-safe
-# or use without installing:
+# or without installing:
 npx rdb-safe check schema.sql
 ```
 
-## Setup
+### Setup
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-## Usage
+### Usage
 
 ```bash
 # Basic check
@@ -29,7 +62,7 @@ rdb-safe check schema.sql --platform railway --tmax 300 --K 100
 cat schema.sql | rdb-safe check --platform vercel
 ```
 
-## Options
+### Options
 
 | Flag | Default | Description |
 |------|---------|-------------|
@@ -39,7 +72,7 @@ cat schema.sql | rdb-safe check --platform vercel
 | `--K` | `20` | Max DB connections |
 | `--tmax` | `60` | Deploy timeout in seconds |
 
-## Exit codes
+### Exit codes
 
 | Code | Meaning |
 |------|---------|
@@ -48,9 +81,9 @@ cat schema.sql | rdb-safe check --platform vercel
 | `2` | FAILURE — do not deploy |
 | `3` | Error — missing API key, bad file, etc. |
 
-## Add to your deploy workflow
+### Add to your deploy workflow
 
-**package.json**
+**package.json — blocks deploy automatically**
 ```json
 {
   "scripts": {
@@ -73,3 +106,19 @@ cat schema.sql | rdb-safe check --platform vercel
 #!/bin/sh
 npx rdb-safe check schema.sql --platform vercel || exit 1
 ```
+
+---
+
+## What does it check?
+
+| Problem | What goes wrong without this check |
+|---------|-----------------------------------|
+| Too many users at once | Your app stops accepting requests |
+| Missing settings | App crashes silently on launch |
+| Database setup takes too long | Deploy fails halfway through |
+
+---
+
+## Based on
+
+Ishii & Jahangir — *"A Simple Mathematical Boundary for Safe Relational Database Deployment in Serverless Environments"*
