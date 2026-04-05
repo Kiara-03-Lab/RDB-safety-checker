@@ -2,7 +2,7 @@
 
 **Avoid database crashes when launching your app on Vercel or Railway.**
 
-![flowchart](flowchart.svg)
+![flowchart](flowchart(1).svg)
 
 Paste your database code into Claude and get a plain-English report on what will break — before you go live.
 
