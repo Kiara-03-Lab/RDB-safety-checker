@@ -1,0 +1,27 @@
+{
+  "name": "rdb-safe",
+  "version": "0.1.0",
+  "description": "Database deployment safety checker for Vercel and Railway",
+  "bin": {
+    "rdb-safe": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["vercel", "railway", "postgres", "deployment", "database"],
+  "author": "Daisuke Ishii",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
