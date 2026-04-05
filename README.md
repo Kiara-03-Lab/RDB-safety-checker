@@ -122,3 +122,4 @@ npx rdb-safe check schema.sql --platform vercel || exit 1
 ## Based on
 
 Ishii & Jahangir — *"A Simple Mathematical Boundary for Safe Relational Database Deployment in Serverless Environments"*
+https://www.researchgate.net/publication/403518920_A_Simple_Mathematical_Boundary_for_Safe_Relational_Database_Deployment_in_Serverless_Environments
