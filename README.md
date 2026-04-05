@@ -1,4 +1,4 @@
-# rdb-safe
+# rdb-safety-checker
 
 **Avoid database crashes when launching your app on Vercel or Railway.**
 
