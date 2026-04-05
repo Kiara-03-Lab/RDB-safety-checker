@@ -1,4 +1,4 @@
-# rdb-safe
+# rdb-safety-checker
 
 Check if your database schema is safe to deploy — before it breaks in production.
 
