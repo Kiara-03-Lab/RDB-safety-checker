@@ -1,4 +1,4 @@
-# rdb-safety-checker
+# rdb-safe
 
 **Avoid database crashes when launching your app on Vercel or Railway.**
 
@@ -48,3 +48,7 @@ Kenji pushes his e-commerce app to Railway. The deploy starts, runs for 70 secon
 ## Based on
 
 Ishii & Jahangir — *"A Simple Mathematical Boundary for Safe Relational Database Deployment in Serverless Environments"*
+
+## How it works
+
+![flowchart](flowchart.svg)
